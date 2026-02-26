@@ -8,14 +8,28 @@ const STORAGE_KEY = 'idle_logic_state_v1'
 const DEFAULT_UPGRADES = [
   { id: 'chat-upgrade', title: 'Bot de Chat', level: 0, basePrice: 50, multiplier: 2 },
   { id: 'storage-upgrade', title: 'Data Center', level: 0, basePrice: 250, multiplier: 12 },
-  { id: 'security-upgrade', title: 'Criptografia Quantum', level: 0, basePrice: 1200, multiplier: 65 }
+  { id: 'security-upgrade', title: 'Criptografia', level: 0, basePrice: 1200, multiplier: 65 },
+  { id: 'network-upgrade', title: 'Fibra Otica', level: 0, basePrice: 6000, multiplier: 350 },
+  { id: 'ai-upgrade', title: 'IA Avancada', level: 0, basePrice: 30000, multiplier: 2000 },
+  { id: 'quantum-upgrade', title: 'Computacao Quantica', level: 0, basePrice: 150000, multiplier: 12000 },
+  { id: 'nano-upgrade', title: 'Nanotecnologia', level: 0, basePrice: 750000, multiplier: 80000 },
+  { id: 'fusion-upgrade', title: 'Energia de Fusao', level: 0, basePrice: 4000000, multiplier: 500000 },
+  { id: 'galactic-upgrade', title: 'Expansao Galatica', level: 0, basePrice: 20000000, multiplier: 3000000 },
+  { id: 'multiverse-upgrade', title: 'Exploracao Multiverso', level: 0, basePrice: 100000000, multiplier: 20000000 }
+
 ]
 
 const DEFAULT_STORE_ITEMS = [
   { id: 'ram', title: 'Memoria RAM', level: 0, basePrice: 180, description: 'Aumenta a multitarefa do PC.' },
   { id: 'ssd', title: 'SSD', level: 0, basePrice: 320, description: 'Carregamento e boot mais rapido.' },
   { id: 'hdd', title: 'HDD', level: 0, basePrice: 140, description: 'Mais espaco para arquivos.' },
-  { id: 'cpu', title: 'Processador', level: 0, basePrice: 520, description: 'Mais poder de processamento.' }
+  { id: 'cpu', title: 'Processador', level: 0, basePrice: 520, description: 'Mais poder de processamento.' },
+  { id: 'gpu', title: 'Placa de Video', level: 0, basePrice: 800, description: 'Melhora o desempenho gráfico.' },
+  { id: 'psu', title: 'Fonte de Alimentação', level: 0, basePrice: 300, description: 'Fornece energia estável para o PC.' },
+  { id: 'cooler', title: 'Sistema de Resfriamento', level: 0, basePrice: 250, description: 'Mantém o PC fresco durante o uso intenso.' },
+  { id: 'motherboard', title: 'Placa-Mãe', level: 0, basePrice: 400, description: 'Conecta todos os componentes do PC.' },
+  { id: 'case', title: 'Gabinete', level: 0, basePrice: 150, description: 'Protege os componentes e melhora a estética.' },
+  { id: 'monitor', title: 'Monitor', level: 0, basePrice: 600, description: 'Melhora a qualidade visual e a experiência de jogo.' }
 ]
 
 function toSafeNumber(value, fallback) {
@@ -72,17 +86,24 @@ function App() {
     const ssdLevel = storeItems.find(item => item.id === 'ssd')?.level ?? 0
     const hddLevel = storeItems.find(item => item.id === 'hdd')?.level ?? 0
     const cpuLevel = storeItems.find(item => item.id === 'cpu')?.level ?? 0
+    const gpuLevel = storeItems.find(item => item.id === 'gpu')?.level ?? 0
+    const psuLevel = storeItems.find(item => item.id === 'psu')?.level ?? 0
+    const coolerLevel = storeItems.find(item => item.id === 'cooler')?.level ?? 0
+    const motherboardLevel = storeItems.find(item => item.id === 'motherboard')?.level ?? 0
+    const caseLevel = storeItems.find(item => item.id === 'case')?.level ?? 0
+    const monitorLevel = storeItems.find(item => item.id === 'monitor')?.level ?? 0
 
     return {
-      passiveBonus: (ramLevel * 2) + (hddLevel * 3),
-      speedMultiplier: 1 + (ssdLevel * 0.05),
-      clickBonus: cpuLevel * 1
+      // Aqui é os boost dos components
+      clickBonus: (cpuLevel * 3) + (gpuLevel * 5) + (ramLevel * 1.5),
+      passiveBonus: (ssdLevel * 4) + (hddLevel * 2) + (motherboardLevel * 3) ,
+      speedMultiplier: 1 + (coolerLevel * 0.02) + (psuLevel * 0.015) + (caseLevel * 0.01) + (monitorLevel * 0.025)
     }
   }, [storeItems])
 
   const passiveIncomePerSecond = useMemo(
     () => upgradesContents.reduce((acc, up) => acc + (up.level * up.multiplier), 0) + storeEffects.passiveBonus,
-    [upgradesContents, storeEffects.passiveBonus]
+    [upgradesContents, storeEffects.passiveBonus] // Aqui é junto com os upgrades 
   )
 
   const serverUpgradeCost = Math.floor(100 * Math.pow(1.5, serverLevel - 1))
@@ -171,6 +192,14 @@ function App() {
     [storeItems]
   )
 
+  const reset = () => {
+    //perguntar se quer resetar
+    if (window.confirm("Tem certeza que deseja resetar o jogo?")) {
+      localStorage.removeItem(STORAGE_KEY)
+      window.location.reload()
+    }
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -187,6 +216,7 @@ function App() {
               priceUpgrade={serverUpgradeCost}
               upgradesContents={upgradesWithCosts}
               buyUpgradeContents={buyUpgradeContents}
+              reset={reset}
             />
           }
         />
@@ -201,7 +231,8 @@ function App() {
             />
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" 
+        element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   )

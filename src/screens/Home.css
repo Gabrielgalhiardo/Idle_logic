@@ -59,6 +59,23 @@
 	text-align: right;
 }
 
+.reset-button {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+}
+
+.reset-button button {
+	padding: 0.6rem 1.1rem;
+	border-radius: 999px;
+	border: 1px solid rgba(140, 210, 255, 0.8);
+	background: linear-gradient(120deg, rgba(55, 150, 255, 0.9), rgba(83, 220, 255, 0.9));
+	color: #06111c;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	transition: transform 0.2s ease;
+}
+
 @media (max-width: 768px) {
 	.game-container {
 		padding: 1.25rem 0.75rem;

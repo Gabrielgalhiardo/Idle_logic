@@ -124,6 +124,7 @@
 	display: grid;
 	gap: 0.5rem;
 	padding: 1rem;
+	margin-bottom: 30px;
 	border-radius: 12px;
 	border: 1px solid rgba(144, 200, 255, 0.55);
 	background: linear-gradient(155deg, rgba(18, 52, 92, 0.9), rgba(12, 32, 60, 0.95));

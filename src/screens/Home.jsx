@@ -10,7 +10,8 @@ function Home({
     buyServerUpgrade,
     priceUpgrade,
     upgradesContents,
-    buyUpgradeContents
+    buyUpgradeContents,
+    reset
 }) {
     return (
         <div className="game-container">
@@ -25,6 +26,11 @@ function Home({
                 upgradesContents={upgradesContents}
                 buyUpgradeContents={buyUpgradeContents}
             />
+            <div className='reset-button'>
+                <button onClick={() => reset()}>
+                    Resetar Jogo
+                </button>
+            </div>
         </div>
     )
 }
