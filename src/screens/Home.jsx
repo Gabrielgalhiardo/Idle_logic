@@ -3,6 +3,7 @@ import './Home.css'
 
 function Home({
     serverLevel,
+    isServerMax,
     money,
     passiveIncome,
     progressSpeedMultiplier,
@@ -11,6 +12,7 @@ function Home({
     priceUpgrade,
     upgradesContents,
     buyUpgradeContents,
+    doPrestige,
     reset
 }) {
     return (
@@ -22,6 +24,8 @@ function Home({
                 progressSpeedMultiplier={progressSpeedMultiplier}
                 onProgressComplete={onProgressComplete}
                 buyServerUpgrade={buyServerUpgrade}
+                isServerMax={isServerMax}
+                doPrestige={doPrestige}
                 priceUpgrade={priceUpgrade}
                 upgradesContents={upgradesContents}
                 buyUpgradeContents={buyUpgradeContents}

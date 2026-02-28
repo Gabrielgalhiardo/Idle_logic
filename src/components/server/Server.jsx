@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import UpgradesContents from '../upgrades_contents/UpgradesContents.jsx'
 import './Server.css'
 
-function Server({ serverLevel, money, passiveIncome, progressSpeedMultiplier, onProgressComplete, buyServerUpgrade, priceUpgrade, upgradesContents, buyUpgradeContents }) {
+function Server({ serverLevel, money, passiveIncome, progressSpeedMultiplier, onProgressComplete, buyServerUpgrade, isServerMax, doPrestige, priceUpgrade, upgradesContents, buyUpgradeContents }) {
     const [progress, setProgress] = useState(0)
     const navigate = useNavigate()
 
     function goToElectronicsStore() {
         navigate('/loja-componentes')
+    }
+
+    function goToPrestigeStore() {
+        navigate('/prestigio')
     }
 
     useEffect(() => {
@@ -57,15 +61,18 @@ function Server({ serverLevel, money, passiveIncome, progressSpeedMultiplier, on
                     <button className="storeNavigationButton" onClick={goToElectronicsStore}>
                         Ir para Loja de Componentes
                     </button>
+                    <button className="storeNavigationButton prestigeNavigationButton" onClick={goToPrestigeStore}>
+                        Ir para Loja de Prestígio
+                    </button>
                 </div>
                 <div className="serverUpgradeContainer">
                     <h3>Upgrade Server</h3>
                     <button
                         className="upgradeButton"
-                        onClick={() => buyServerUpgrade()}
-                        disabled={money < priceUpgrade}
+                        onClick={isServerMax ? () => doPrestige?.() : () => buyServerUpgrade()}
+                        disabled={!isServerMax && money < priceUpgrade}
                     >
-                        Upgrade {priceUpgrade.toLocaleString()} coins
+                        {isServerMax ? 'Dar Prestigio' : `Upgrade ${priceUpgrade.toLocaleString()} coins`}
                     </button>
                 </div>
                 <div className="serverImageContainer">

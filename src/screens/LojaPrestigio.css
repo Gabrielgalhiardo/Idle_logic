@@ -1,0 +1,207 @@
+.prestige-container {
+	min-height: 100vh;
+	padding: 2rem 1rem 2.5rem;
+	background:
+		radial-gradient(circle at 20% 12%, rgba(148, 125, 255, 0.18), transparent 45%),
+		radial-gradient(circle at 82% 85%, rgba(92, 255, 210, 0.14), transparent 40%),
+		linear-gradient(165deg, #070f22 0%, #12163a 55%, #070d1e 100%);
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.prestige-container::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(to bottom, rgba(173, 156, 255, 0.08) 1px, transparent 1px),
+		linear-gradient(to right, rgba(173, 156, 255, 0.08) 1px, transparent 1px);
+	background-size: 28px 28px;
+	opacity: 0.2;
+	pointer-events: none;
+}
+
+.prestige-container > * {
+	position: relative;
+	z-index: 1;
+}
+
+.prestige-header {
+	width: min(720px, 94vw);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.prestige-title-group {
+	display: grid;
+	gap: 0.4rem;
+}
+
+.prestige-kicker {
+	font-size: 0.78rem;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #c4b8ff;
+}
+
+.prestige-title-group h2 {
+	font-size: clamp(1.4rem, 3vw, 1.8rem);
+	font-weight: 800;
+	color: #f3f0ff;
+	text-shadow: 0 0 14px rgba(195, 163, 255, 0.35);
+}
+
+.prestigeBackButton {
+	padding: 0.6rem 1.1rem;
+	border-radius: 999px;
+	border: 1px solid rgba(188, 162, 255, 0.8);
+	background: linear-gradient(120deg, rgba(132, 106, 255, 0.9), rgba(174, 122, 255, 0.9));
+	color: #080617;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	cursor: pointer;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.prestigeBackButton:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 16px rgba(148, 101, 255, 0.45);
+	filter: brightness(1.05);
+}
+
+.prestigeBackButton:active {
+	transform: translateY(1px);
+	filter: brightness(0.95);
+}
+
+.prestige-stats {
+	width: min(720px, 94vw);
+	display: grid;
+	grid-template-columns: minmax(180px, 240px);
+	justify-content: start;
+	gap: 1rem;
+}
+
+.prestigeStatCard {
+	display: grid;
+	gap: 0.4rem;
+	padding: 0.9rem 1rem;
+	border-radius: 12px;
+	border: 1px solid rgba(188, 162, 255, 0.55);
+	background: linear-gradient(150deg, rgba(56, 34, 112, 0.88), rgba(32, 20, 66, 0.95));
+	box-shadow: inset 0 0 14px rgba(178, 145, 255, 0.2);
+}
+
+.prestigeStatLabel {
+	font-size: 0.78rem;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #d5c7ff;
+}
+
+.prestigeStatValue {
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: #f3ecff;
+}
+
+.prestige-content {
+	width: min(720px, 94vw);
+}
+
+.prestige-items {
+	display: grid;
+	gap: 0.9rem;
+	margin-bottom: 1.2rem;
+}
+
+.prestige-item-card {
+	display: grid;
+	gap: 0.5rem;
+	padding: 1rem;
+	margin-bottom: 20px;
+	border-radius: 12px;
+	border: 1px solid rgba(190, 163, 255, 0.52);
+	background: linear-gradient(155deg, rgba(57, 36, 113, 0.88), rgba(31, 21, 69, 0.94));
+	box-shadow: inset 0 0 14px rgba(179, 146, 255, 0.18);
+}
+
+.prestige-item-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.6rem;
+}
+
+.prestige-item-name {
+	font-weight: 800;
+	color: #f2ecff;
+}
+
+.prestige-item-level {
+	font-size: 0.82rem;
+	color: #d7c7ff;
+}
+
+.prestige-item-desc {
+	margin: 0;
+	font-size: 0.88rem;
+	color: #dbcfff;
+}
+
+.prestigeItemButton {
+	width: 100%;
+	padding: 0.65rem 1rem;
+	border-radius: 999px;
+	border: 1px solid rgba(205, 185, 255, 0.85);
+	background: linear-gradient(120deg, rgba(141, 102, 255, 0.95), rgba(181, 114, 255, 0.92));
+	color: #09061b;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	cursor: pointer;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.prestigeItemButton:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 7px 16px rgba(153, 115, 255, 0.42);
+	filter: brightness(1.05);
+}
+
+.prestigeItemButton:active {
+	transform: translateY(1px);
+	filter: brightness(0.96);
+}
+
+.prestigeItemButton:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	filter: saturate(0.7);
+	box-shadow: none;
+}
+
+@media (max-width: 768px) {
+	.prestige-container {
+		padding: 1.5rem 0.75rem 2rem;
+	}
+
+	.prestige-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.prestige-stats {
+		grid-template-columns: 1fr;
+	}
+
+	.prestige-item-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
