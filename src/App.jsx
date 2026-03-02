@@ -36,9 +36,9 @@ const DEFAULT_STORE_ITEMS = [
 
 // Novidade: Lista de Habilidades Permanentes
 const DEFAULT_PRESTIGE_UPGRADES = [
-  { id: 'overclock', title: 'Overclock Global', level: 0, maxLevel: 10, cost: 1, description: '+15% de Renda Passiva por nível.' },
-  { id: 'desconto-loja', title: 'Contratos VIP', level: 0, maxLevel: 5, cost: 2, description: 'Reduz o preço dos Componentes em 5% por nível.' },
-  { id: 'clique-passivo', title: 'Engenharia Reversa', level: 0, maxLevel: 5, cost: 3, description: 'Seu clique ganha +10% da sua Renda Passiva por nível.' },
+  { id: 'overclock', title: 'Overclock Global', level: 0, maxLevel: 10, cost: 1, description: '+30% de Renda Passiva por nível.' },
+  { id: 'desconto-loja', title: 'Contratos VIP', level: 0, maxLevel: 5, cost: 2, description: 'Reduz o preço dos Componentes em 35% por nível.' },
+  { id: 'clique-passivo', title: 'Engenharia Reversa', level: 0, maxLevel: 5, cost: 3, description: 'Seu clique ganha +15% da sua Renda Passiva por nível.' },
   { id: 'limite-server', title: 'Quebra de Limites', level: 0, maxLevel: 2, cost: 5, description: 'Aumenta o Nível Máximo do Servidor em +1.' }
 ]
 
@@ -88,9 +88,9 @@ function App() {
   const prestigeEffects = useMemo(() => {
     const getLvl = (id) => prestigeUpgrades.find(u => u.id === id)?.level ?? 0;
     return {
-      passiveMultiplier: 1 + (getLvl('overclock') * 0.15),
-      storeDiscount: 1 - (getLvl('desconto-loja') * 0.05),
-      clickPassiveBonus: getLvl('clique-passivo') * 0.10,
+      passiveMultiplier: 1 + (getLvl('overclock') * 0.30),
+      storeDiscount: 1 - (getLvl('desconto-loja') * 0.35),
+      clickPassiveBonus: getLvl('clique-passivo') * 0.15,
       extraMaxServerLevel: getLvl('limite-server')
     }
   }, [prestigeUpgrades])
